@@ -16,14 +16,14 @@ import {
   SecurityContext,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {AngularEditorConfig, angularEditorConfig} from './config';
-import {AngularEditorToolbarComponent} from './angular-editor-toolbar.component';
-import {AngularEditorService} from './angular-editor.service';
-import {DOCUMENT} from '@angular/common';
-import {DomSanitizer} from '@angular/platform-browser';
-import {isDefined} from './utils';
-import {last} from 'rxjs/operators';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AngularEditorConfig } from './config';
+import { AngularEditorToolbarComponent } from './angular-editor-toolbar.component';
+import { AngularEditorService } from './angular-editor.service';
+import { DOCUMENT } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { isDefined } from './utils';
+import { last } from 'rxjs/operators';
 
 @Component({
   selector: 'angular-editor',
@@ -51,7 +51,7 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
   blurInstance: any;
 
   @Input() id = '';
-  @Input() config: AngularEditorConfig = angularEditorConfig;
+  @Input() config: AngularEditorConfig;
   @Input() placeholder = '';
   @Input() tabIndex: number | null;
 
@@ -64,11 +64,11 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
   @Output() viewMode = new EventEmitter<boolean>();
 
   /** emits `blur` event when focused out from the textarea */
-    // tslint:disable-next-line:no-output-native no-output-rename
+  // tslint:disable-next-line:no-output-native no-output-rename
   @Output('blur') blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   /** emits `focus` event when focused in to the textarea */
-    // tslint:disable-next-line:no-output-rename no-output-native
+  // tslint:disable-next-line:no-output-rename no-output-native
   @Output('focus') focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   @HostBinding('attr.tabindex') tabindex = -1;
@@ -205,7 +205,7 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
    * @param fn a function
    */
   registerOnChange(fn: any): void {
-    this.onChange = e => (e === '<br>' ? fn('') : fn(e)) ;
+    this.onChange = e => (e === '<br>' ? fn('') : fn(e));
   }
 
   /**
@@ -357,18 +357,17 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
 
   private configure() {
     this.editorToolbar.id = this.id;
-    this.config.toolbarPosition = this.config.toolbarPosition ? this.config.toolbarPosition : angularEditorConfig.toolbarPosition;
     if (this.config.showToolbar !== undefined) {
       this.editorToolbar.showToolbar = this.config.showToolbar;
     }
-    const fonts = this.config.fonts ? this.config.fonts : angularEditorConfig.fonts;
+    const fonts = this.config.fonts;
     this.editorToolbar.fonts = fonts.map(x => {
-      return {label: x.name, value: x.name};
+      return { label: x.name, value: x.name };
     });
     if (this.config.customClasses) {
       this.editorToolbar.customClasses = this.config.customClasses;
-      this.editorToolbar.customClassList = this.config.customClasses.map((x, i) => ({label: x.name, value: i.toString()}));
-      this.editorToolbar.customClassList.unshift({label: 'Clear Class', value: '-1'});
+      this.editorToolbar.customClassList = this.config.customClasses.map((x, i) => ({ label: x.name, value: i.toString() }));
+      this.editorToolbar.customClassList.unshift({ label: 'Clear Class', value: '-1' });
     }
     this.editorToolbar.uploadUrl = this.config.uploadUrl;
     this.editorService.uploadUrl = this.config.uploadUrl;

@@ -3,16 +3,13 @@ export interface CustomClass {
   class: string;
   tag?: string;
 }
-
 export interface Font {
   name: string;
   class: string;
 }
-
-/*commented by vasanth to to be an alternative */
 export interface iconProperty {
   title: string;
-  identifier : string;
+  identifier: string;
   visibility: boolean;
   class: string;
   tabIndex?: number;
@@ -20,11 +17,11 @@ export interface iconProperty {
 export interface iconGroup {
   groupName?: string;
   groupClass?: string;
-  iconSet :iconProperty[];
+  iconSet: iconProperty[];
 }
 
-export interface AngularEditorConfig {
-  editable?: boolean;
+export class AngularEditorConfig {
+  editable?: boolean = true;
   spellcheck?: boolean;
   height?: 'auto' | string;
   minHeight?: '0' | string;
@@ -39,18 +36,24 @@ export interface AngularEditorConfig {
   defaultFontName?: string;
   defaultFontSize?: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | string;
   uploadUrl?: string;
-  fonts?: Font[];
+  fonts?: Font[] = [
+    { class: 'arial', name: 'Arial' },
+    { class: 'times-new-roman', name: 'Times New Roman' },
+    { class: 'calibri', name: 'Calibri' },
+    { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+  ];
   customClasses?: CustomClass[];
   sanitize?: boolean;
-  toolbarPosition?: 'top' | 'bottom';
-  
+  toolbarPosition?: 'top' | 'bottom' = 'top';
+
   /*Custom Attribute add by vasanth  */
-  iconAvailibility : 'all' | 'specific' | 'none';
-  iconGroup? : iconGroup[];
+  iconAvailibility: 'all' | 'specific' | 'none';
+  iconGroup?: iconGroup[];
 
 
 }
-
+/*Sample default value */
+/*
 export const angularEditorConfig: AngularEditorConfig = {
   editable: true,
   spellcheck: true,
@@ -77,3 +80,4 @@ export const angularEditorConfig: AngularEditorConfig = {
   sanitize: true,
   toolbarPosition: 'top',
 };
+*/
