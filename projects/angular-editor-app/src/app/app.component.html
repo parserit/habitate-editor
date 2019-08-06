@@ -4,7 +4,7 @@
   <input id="test_input">
   <br><br>
   <form [formGroup]="form">
-    <angular-editor autofocus="true" id="editor2" formControlName="signature" [config]="config" (ngModelChange)="onChange2($event)"></angular-editor>
+    <angular-editor autofocus="true" id="editor2" formControlName="signature" [config]="config" (ngModelChange)="onChange2($event)" (execute)="executeCommand($event)"></angular-editor>
   </form>
   <p>
     Form Value: {{ form.value.signature }}

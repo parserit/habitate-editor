@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   htmlContent1 = '';
   htmlContent2 = '';
 
-  config: AngularEditorConfig = {
+  config: Partial<AngularEditorConfig> = {
     editable: true,
     spellcheck: true,
     minHeight: '5rem',
@@ -91,6 +91,9 @@ export class AppComponent implements OnInit {
       signature: ['test2', Validators.required]
     });
     console.log(this.htmlContent1);
+  }
+  executeCommand(command: string) {
+    console.log(command)
   }
 
   onChange(event) {

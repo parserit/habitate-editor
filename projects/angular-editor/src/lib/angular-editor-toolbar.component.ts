@@ -24,7 +24,6 @@ export class AngularEditorToolbarComponent implements OnInit {
   backColor;
 
   ngOnInit(){
-    console.log(this.config); 
 
   }
 
@@ -155,7 +154,6 @@ export class AngularEditorToolbarComponent implements OnInit {
    * highlight editor buttons when cursor moved or positioning
    */
   triggerButtons() {
-    debugger;
     if (!this.showToolbar) {
       return;
     }

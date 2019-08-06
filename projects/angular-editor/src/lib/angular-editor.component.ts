@@ -63,6 +63,8 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
 
   @Output() viewMode = new EventEmitter<boolean>();
 
+  @Output() execute: EventEmitter<string> = new EventEmitter<string>();
+
   /** emits `blur` event when focused out from the textarea */
   // tslint:disable-next-line:no-output-native no-output-rename
   @Output('blur') blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
@@ -125,6 +127,7 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
       }
       this.exec();
     }
+    this.execute.emit(command);
   }
 
   /**
@@ -356,11 +359,12 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
   }
 
   private configure() {
+    debugger;
     this.editorToolbar.id = this.id;
     if (this.config.showToolbar !== undefined) {
       this.editorToolbar.showToolbar = this.config.showToolbar;
     }
-    const fonts = this.config.fonts;
+    const fonts = this.config.fonts ? this.config.fonts : [];
     this.editorToolbar.fonts = fonts.map(x => {
       return { label: x.name, value: x.name };
     });
