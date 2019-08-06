@@ -68,26 +68,15 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 editorConfig: AngularEditorConfig = {
     editable: true,
-      spellcheck: true,
-      height: 'auto',
-      minHeight: '0',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
-      customClasses: [
+    spellcheck: true,
+    minHeight: '5rem',
+    maxHeight: '15rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    sanitize: true,
+    toolbarPosition: 'bottom',
+    iconAvailibility : 'all',
+    customClasses: [
       {
         name: 'quote',
         class: 'quote',
@@ -102,10 +91,47 @@ editorConfig: AngularEditorConfig = {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
-    sanitize: true,
-    toolbarPosition: 'top',
-};
+    iconGroup : [
+      {
+        groupName: 'Staging Group',
+        groupClass : '',
+        iconSet  :[
+          {
+            title: 'Undo',
+            identifier : 'undo',
+            visibility: true,
+            class: 'fa fa-undo',
+            tabIndex: 1
+          },{
+            title: 'Redo',
+            identifier : 'redo',
+            visibility: true,
+            class: 'fa fa-repeat',
+            tabIndex: 2
+          }
+        ] 
+      },
+      {
+        groupName: ' Group 2',
+        groupClass : '',
+        iconSet  :[
+          {
+            title: 'Bold',
+            identifier : 'bold',
+            visibility: true,
+            class: 'fa fa-bold',
+            tabIndex: 3
+          },{
+            title: 'Italic',
+            identifier : 'italic',
+            visibility: true,
+            class: 'fa fa-italic',
+            tabIndex: 4
+          }
+        ] 
+      }
+    ]
+  };
 ```
 
 For `ngModel` to work, you must import `FormsModule` from `@angular/forms`, or for `formControlName`, you must import `ReactiveFormsModule` from `@angular/forms`
@@ -144,8 +170,7 @@ See [the Releases section of our project](https://github.com/kolkov/angular-edit
 
 **Andrey Kolkov**
 
-* <https://github.com/kolkov>
+## contributor 
 
-[npm]: https://www.npmjs.com/
-[demo]: https://angular-editor-wysiwyg.stackblitz.io/
-[example]: https://stackblitz.com/edit/angular-editor-wysiwyg
+**Habitate**
+
