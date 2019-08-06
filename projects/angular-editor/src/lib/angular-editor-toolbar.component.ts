@@ -1,8 +1,8 @@
-import {Component, ElementRef, EventEmitter, Inject, Output, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Inject, Output, Renderer2, ViewChild, Input, OnInit} from '@angular/core';
 import {AngularEditorService} from './angular-editor.service';
 import {HttpResponse} from '@angular/common/http';
 import {DOCUMENT} from '@angular/common';
-import {CustomClass, Font} from './config';
+import {CustomClass, Font, AngularEditorConfig} from './config';
 import {SelectOption} from './ae-select/ae-select.component';
 
 @Component({
@@ -11,7 +11,7 @@ import {SelectOption} from './ae-select/ae-select.component';
   styleUrls: ['./angular-editor-toolbar.component.scss']
 })
 
-export class AngularEditorToolbarComponent {
+export class AngularEditorToolbarComponent implements OnInit {
   id = '';
   htmlMode = false;
   showToolbar = true;
@@ -22,6 +22,13 @@ export class AngularEditorToolbarComponent {
   fontSize = '3';
   foreColour;
   backColor;
+
+  ngOnInit(){
+    console.log(this.config); 
+
+  }
+
+  @Input() config: AngularEditorConfig;
 
   headings: SelectOption[] = [
     {
@@ -148,13 +155,14 @@ export class AngularEditorToolbarComponent {
    * highlight editor buttons when cursor moved or positioning
    */
   triggerButtons() {
+    debugger;
     if (!this.showToolbar) {
       return;
     }
     this.buttons.forEach(e => {
       const result = this.doc.queryCommandState(e);
       const elementById = this.doc.getElementById(e + '-' + this.id);
-      if (result) {
+      if(elementById) if (result) {
         this.r.addClass(elementById, 'active');
       } else {
         this.r.removeClass(elementById, 'active');
@@ -205,9 +213,9 @@ export class AngularEditorToolbarComponent {
     Object.keys(this.tagMap).map(e => {
       const elementById = this.doc.getElementById(this.tagMap[e] + '-' + this.id);
       const node = nodes.find(x => x.nodeName === e);
-      if (node !== undefined && e === node.nodeName) {
+      if (node !== undefined && e === node.nodeName && elementById) {
         this.r.addClass(elementById, 'active');
-      } else {
+      } else if(elementById){
         this.r.removeClass(elementById, 'active');
       }
     });

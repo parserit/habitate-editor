@@ -9,6 +9,20 @@ export interface Font {
   class: string;
 }
 
+/*commented by vasanth to to be an alternative */
+export interface iconProperty {
+  title: string;
+  identifier : string;
+  visibility: boolean;
+  class: string;
+  tabIndex?: number;
+}
+export interface iconGroup {
+  groupName?: string;
+  groupClass?: string;
+  iconSet :iconProperty[];
+}
+
 export interface AngularEditorConfig {
   editable?: boolean;
   spellcheck?: boolean;
@@ -29,6 +43,12 @@ export interface AngularEditorConfig {
   customClasses?: CustomClass[];
   sanitize?: boolean;
   toolbarPosition?: 'top' | 'bottom';
+  
+  /*Custom Attribute add by vasanth  */
+  iconAvailibility : 'all' | 'specific' | 'none';
+  iconGroup? : iconGroup[];
+
+
 }
 
 export const angularEditorConfig: AngularEditorConfig = {
@@ -46,6 +66,7 @@ export const angularEditorConfig: AngularEditorConfig = {
   defaultParagraphSeparator: '',
   defaultFontName: '',
   defaultFontSize: '',
+  iconAvailibility : 'all',
   fonts: [
     {class: 'arial', name: 'Arial'},
     {class: 'times-new-roman', name: 'Times New Roman'},

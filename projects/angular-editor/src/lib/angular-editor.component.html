@@ -19,6 +19,6 @@
     </div>
     <span class="angular-editor-placeholder">{{ placeholder || config['placeholder'] }}</span>
   </div>
-  <angular-editor-toolbar *ngIf="config.toolbarPosition === 'bottom'" #editorToolbar
+  <angular-editor-toolbar *ngIf="config.toolbarPosition === 'bottom'" #editorToolbar [config]="config"
                           (execute)="executeCommand($event)"></angular-editor-toolbar>
 </div>
